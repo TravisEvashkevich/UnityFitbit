@@ -514,37 +514,6 @@ namespace Assets.Scripts.Fitbit
                     _fitbitData.ProfileData[xElement.Name.LocalName] = xElement.Value;
                 }
             }
-
-            /*var json = JObject.Parse(data);
-            
-            foreach (JProperty property in json["user"].Children())
-            {
-                if(property.Name == "topBadges")
-                    continue;
-
-                Debug.Log("Key: "+ property.Name + "   Value" + property.Value);
-                if (_fitbitData.ProfileData.ContainsKey(property.Name))
-                {
-                    _fitbitData.ProfileData[property.Name] = property.Value.ToString();
-                }
-                if(!_fitbitData.RawProfileData.ContainsKey(property.Name))
-                    _fitbitData.RawProfileData.Add(property.Name,property.Value.ToString());
-            }*/
-
-            /*var doc = XDocument.Parse(data);
-            doc.Descendants("topBadges").Remove();
-            //we need to keep a copy of the original data incase sometime down the road we wanna do something with it
-            //but we also need to make a working copy, of just the essentials that we are using now.
-            foreach (XElement xElement in doc.Descendants())
-            {
-                //Debug.Log(xElement.Name.LocalName + ": Value:" + xElement.Value);V
-                _fitbitData.RawProfileData.Add(xElement.Name.LocalName,xElement.Value);
-                if (_fitbitData.ProfileData.ContainsKey(xElement.Name.LocalName))
-                {
-                    _fitbitData.ProfileData[xElement.Name.LocalName] = xElement.Value;
-                }
-            }*/
-
         }
 
         private void ParseStepsData(string data)
