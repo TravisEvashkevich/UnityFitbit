@@ -131,13 +131,6 @@ namespace Assets.Scripts.Fitbit
 #if UNITY_EDITOR
             Manager.GetComponent<Manager>().OpenFitbitMenu();
 #endif
-            /*#if UNITY_ANDROID && !UNITY_EDITOR
-            WebView.ClearCache();
-            WebView.ControlType = eWebviewControlType.CLOSE_BUTTON;
-            WebView.LoadRequest(url);
-            WebView.Frame = new Rect(0f, 0f, Screen.width, Screen.height);
-            WebView.Show();
-#endif*/
         }
 
         private void UseReturnCode()
