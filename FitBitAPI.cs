@@ -288,15 +288,10 @@ namespace Assets.Scripts.Fitbit
             BuildProfile();
 
             //make sure the loading screen is open and change message
-            Manager.GetComponent<Manager>().SetLoadingMessage("Processing Fitbit Data");
-            Manager.GetComponent<Manager>().OpenLoadingPanel();
             _fitbitData.LastSyncTime = DateTime.Now.ToUniversalTime();
             Debug.Log("LastSyncTime: "+ DateTime.Now.ToUniversalTime().ToString("g"));
             //For now, we'll do the GS call for character stuff here till I find a better way to handle it.
             User.Instance.GetLastGsData();
-            //Manager.GetComponent<Manager>().OpenCharacterMenu();
-            //WebView.Hide();
-            //MessageBox.GetComponent<MessageBoxBehavior>().CloseMessageBox();
         }
 
         private void GetCharacterRelevantData()
