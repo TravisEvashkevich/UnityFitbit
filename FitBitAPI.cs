@@ -58,11 +58,6 @@ namespace Assets.Scripts.Fitbit
         public FitbitData _fitbitData;
         public User User;
 
-        public GameObject FitbitPanel;
-        public GameObject ButtonPrefab;
-        public GameObject Manager;
-        public GameObject MessageBox;
-        public Image LoadingImage;
         //Debug String for Android
         private string _statusMessage;
 
@@ -129,7 +124,7 @@ namespace Assets.Scripts.Fitbit
 
         private void UseReturnCode()
         {
-            _statusMessage += "return code isn't empty";
+            Debug.Log("return code isn't empty");
             //not empty means we put a code in
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(_clientId + ":" + _consumerSecret);
             var encoded = Convert.ToBase64String(plainTextBytes);
@@ -156,7 +151,7 @@ namespace Assets.Scripts.Fitbit
 
             var parsed = new JSONObject(_wwwRequest.text);
             ParseAccessToken(parsed);
-            _statusMessage += "\nParsed Token: " + _oAuth2.Token;
+            Debug.Log("\nParsed Token: " + _oAuth2.Token);
 
             //now that we have the Auth Token, Lets use it and get data.
             GetAllData();
@@ -211,7 +206,7 @@ namespace Assets.Scripts.Fitbit
             //we passed the full URL so we'll have to extract the 
             //We will add 6 to the string lenght to account for "?code="
             _returnCode = code.Substring(CustomAndroidScheme.Length + 6);
-            _statusMessage += "Return Code is: " + _returnCode;
+            Debug("Return Code is: " + _returnCode);
             
             UseReturnCode();
         }
@@ -284,17 +279,15 @@ namespace Assets.Scripts.Fitbit
         public void GetAllData()
         {
             GetProfileData();
-            GetCharacterRelevantData();
+            GetAllRelevantData();
             BuildProfile();
 
             //make sure the loading screen is open and change message
             _fitbitData.LastSyncTime = DateTime.Now.ToUniversalTime();
             Debug.Log("LastSyncTime: "+ DateTime.Now.ToUniversalTime().ToString("g"));
-            //For now, we'll do the GS call for character stuff here till I find a better way to handle it.
-            User.Instance.GetLastGsData();
         }
 
-        private void GetCharacterRelevantData()
+        private void GetAllRelevantData()
         {
             GetSteps();
             GetDistance();
@@ -406,36 +399,9 @@ namespace Assets.Scripts.Fitbit
             {
             }
 
-            //turn on the panel just incase we haven't already and to avoid null exceptions
-            //TODO actually replace this with a loading screen
-            FitbitPanel.transform.parent.gameObject.SetActive(true);
-            FitbitPanel.gameObject.SetActive(true);
-
-            if(imageWWW.error == null)
-            {
-                //Header area. Pic and Name
-                var pic = FitbitPanel.transform.Find("ProfilePicture");
-                var thumbnail = new Texture2D(100, 100);
-                thumbnail = imageWWW.texture;
-                pic.GetComponent<Image>().sprite = Sprite.Create(thumbnail, new Rect(0, 0, 100, 100), new Vector2(0.5f, 0.5f));
-                
-            }
-            var name = FitbitPanel.transform.Find("Name");
             Debug.Log(_fitbitData.RawProfileData["fullName"]);
-            name.GetComponent<Text>().text = _fitbitData.RawProfileData["fullName"];
 
-
-            //we should check to see if there is "data" (aka buttons) already or if this is 
-            //the first time we are doing this (to avoid mass amount of the same buttons)
-            //Details Area (inside the contentpanel inside the scrollviewer)
-            var contentPanel = GameObject.Find("FitbitProfileContentPanel").gameObject;
-            if (contentPanel.transform.childCount != 0)
-            {
-                foreach (Transform child in contentPanel.transform)
-                {
-                    Destroy(child.gameObject);
-                }
-            }
+            //we should check to see if there is "data" already
             if(_fitbitData.ProfileData.Count != 0)
             {
                 foreach (KeyValuePair<string, string> kvp in _fitbitData.ProfileData)
@@ -581,24 +547,23 @@ namespace Assets.Scripts.Fitbit
 
         IEnumerator WaitForAccess(WWW www)
         {
-            _statusMessage += "waiting for access\n";
+            Debug.Log("waiting for access\n");
             yield return www;
-            _statusMessage += "Past the Yield \n";
+            Debug.Log("Past the Yield \n";
             // check for errors
             if (www.error == null)
             {
-                _statusMessage += "no error \n";
-                _statusMessage += "wwwText: " + www.text;
+                Debug.Log("no error \n");
+                Debug.Log("wwwText: " + www.text);
                 //Debug.Log("WWW Ok!: " + www.text);
                 // _accessToken = www.responseHeaders["access_token"];
             }
             if (www.error != null)
             {
-                _statusMessage += "\n Error" + www.error;
+                Debug.Log("\n Error" + www.error);
                 Debug.Log(www.error);
-                //Manager.GetComponent<Manager>().OpenFitbitMenu();
             }
-            _statusMessage += "end of WaitForAccess \n";
+            Debug.Log("end of WaitForAccess \n");
         }
 
         //just a utility function to get the correct date format for activity calls that require one
