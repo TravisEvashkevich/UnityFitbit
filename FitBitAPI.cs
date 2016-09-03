@@ -443,54 +443,14 @@ namespace Assets.Scripts.Fitbit
                     if(kvp.Key == "avatar")
                         continue;
                     
-                    var btn = Instantiate(ButtonPrefab);
-                    btn.transform.SetParent(contentPanel.transform,false);
                     //put a space between the camelCase
                     var tempKey = Regex.Replace(kvp.Key, "(\\B[A-Z])", " $1");
                     //then capitalize the first letter
                     UppercaseFirst(tempKey);
-                    btn.transform.FindChild("Text").GetComponent<Text>().text = tempKey + ": " + kvp.Value;
-                    btn.name = tempKey + "Btn";
                 }
-                //Steps Button
-                var step = Instantiate(ButtonPrefab);
-                step.transform.SetParent(contentPanel.transform, false);
-                step.transform.FindChild("Text").GetComponent<Text>().text = "Steps: " + _fitbitData.CurrentSteps;
-                step.name = "StepsBtn";
-               
-                //Dist Button
-                var dist = Instantiate(ButtonPrefab);
-                dist.transform.SetParent(contentPanel.transform, false);
-
-                string distUnit = "";
-                if (_fitbitData.RawProfileData["distanceUnit"] == "METRIC" || _fitbitData.RawProfileData["distanceUnit"] == "UK")
-                {
-                    distUnit = "KM";
-                }
-                else if (_fitbitData.RawProfileData["distanceUnit"] == "US")
-                {
-                    distUnit = "Mi";
-                }
-
-                dist.transform.FindChild("Text").GetComponent<Text>().text = "Distance: " + _fitbitData.CurrentDistance + " " + distUnit;
-                dist.name = "DistanceBtn";
-
-                //Calories Button
-                var cals = Instantiate(ButtonPrefab);
-                cals.transform.SetParent(contentPanel.transform, false);
-                cals.transform.FindChild("Text").GetComponent<Text>().text = "Calories: " + _fitbitData.CurrentCalories;
-                cals.name = "CaloriesBtn";
-
-                //Sleep Button
-                var sleep = Instantiate(ButtonPrefab);
-                sleep.transform.SetParent(contentPanel.transform, false);
-                sleep.transform.FindChild("Text").GetComponent<Text>().text = "Minutes Asleep: " + _fitbitData.CurrentSleep;
-                sleep.name = "SleepBtn";
             }
             
             _bGotTheData = true;
-            //turn the panel back off again till something else turns it back on
-            FitbitPanel.transform.parent.gameObject.SetActive(false);
         }
         #endregion
 
