@@ -87,15 +87,12 @@ namespace Assets.Scripts.Fitbit
         public void Start()
         {
             DontDestroyOnLoad(this);
-            //_fitbitData = User.Instance.FitbitData;
         }
         
         private void OnGUI()
         {
             if (!_bGotTheData && !string.IsNullOrEmpty(_statusMessage) && _bFirstFire)
             {
-                MessageBox.GetComponent<MessageBoxBehavior>().SetMessageBoxText(_statusMessage);
-                MessageBox.GetComponent<MessageBoxBehavior>().OpenMessageBox();
                 _bFirstFire = false;
             }
         }
@@ -106,8 +103,6 @@ namespace Assets.Scripts.Fitbit
             //if we do, then we'll use the RefreshToken to get the data
             //if not then we will just do the regular ask user to login to get data
             //then save the tokens correctly.
-            Manager.GetComponent<Manager>().SetLoadingMessage("Starting Fitbit Login");
-            Manager.GetComponent<Manager>().OpenLoadingPanel();
 
             if (PlayerPrefs.HasKey("FitbitRefreshToken"))
             {
@@ -129,7 +124,6 @@ namespace Assets.Scripts.Fitbit
             Application.OpenURL(url);
             // print(url);
 #if UNITY_EDITOR
-            Manager.GetComponent<Manager>().OpenFitbitMenu();
 #endif
         }
 
