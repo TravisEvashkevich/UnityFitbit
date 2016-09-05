@@ -14,5 +14,5 @@ An example of how you would use this is:
 - Call Methods from FitbitAPI to start getting Data :D
 (start with LoginToFitbit(); After that you can start using GetSteps etc.)
 
-**If you're going to use it with Android you'll really want to check out the blogpost above that shows you how to make the extra piece that you need to be able to get the callback back into your app. Without it, you won't get far. 
-**If you're just using it on Desktop then it's fine, you should be able to just use the classes with no problem. The only caveat is that there is no way to grab the return code directly from the browser so your user will have to copy paste it manually.
+* If you're going to use it with Android you'll really want to check out the blogpost above that shows you how to make the extra piece that you need to be able to get the callback back into your app. Without it, you won't get far. 
+* If you're just using it on Desktop then it's fine, you should be able to just use the classes with no problem. The only caveat is that there is no way to grab the return code directly from the browser so your user will have to copy paste it manually.
