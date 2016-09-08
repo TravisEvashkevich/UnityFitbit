@@ -24,12 +24,12 @@ namespace Assets.Scripts.Fitbit
         /// </summary>
         private const string _consumerSecret = "YOUR_KEY_HERE";
         private const string _clientId = "YOUR_CLIENT_ID_HERE";
-
+        private const string _callbackURL = "YOUR_CALLBACK_URL"
         //If you're making an app for Android, fill in your custom scheme here from Fitbit
         //if you don't know how to do the callback through a native browser on a mobile device 
         //http://technicalartistry.blogspot.ca/2016/01/fitbit-unity-oauth-2-and-native.html 
         //can probably help :)
-        private const string CustomAndroidScheme = "YOUR_CALLBACK_URL";
+        private const string CustomAndroidScheme = "YOUR_ANDROIDCALLBACK_URL";
 
         private const string _tokenUrl = "https://api.fitbit.com/oauth2/token";
         private const string _baseGetUrl = "https://api.fitbit.com/1/user/-/";
@@ -56,7 +56,6 @@ namespace Assets.Scripts.Fitbit
 
         private OAuth2AccessToken _oAuth2 = new OAuth2AccessToken();
         public FitbitData _fitbitData;
-        public User User;
 
         //Debug String for Android
         private string _statusMessage;
@@ -67,7 +66,7 @@ namespace Assets.Scripts.Fitbit
             {
                 //determine which platform we're running on and use the appropriate url
                 if(Application.platform == RuntimePlatform.WindowsEditor)
-                    return   WWW.EscapeURL("http://test.debuginc.com/envdump.php/"); 
+                    return   WWW.EscapeURL(_callbackURL); 
                 else if(Application.platform == RuntimePlatform.Android)
                 {
                     return WWW.EscapeURL(CustomAndroidScheme); 
@@ -155,7 +154,6 @@ namespace Assets.Scripts.Fitbit
 
             //now that we have the Auth Token, Lets use it and get data.
             GetAllData();
-            //User.Instance.UpdateCharacterData();
             _bGotTheData = true;
         }
 
@@ -594,6 +592,7 @@ namespace Assets.Scripts.Fitbit
 
         private static string GetYesterdayDate()
         {
+            //TODO: DOUBLE CHECK THAT THIS ACTUALLY WORKS FOR JAN 1 of a year (AKA gets Dec 31 of previous year.)
             //Getting yesterday is a bit tricky sometimes. We have to check what day it is and what month even before actually building the string
             //This is because for example, Jan 1st, 2015. The last day would be Dec 31, 2014. This requires us to actually change the whole string
             //compared to if it was intra-month.
