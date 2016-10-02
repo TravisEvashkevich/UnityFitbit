@@ -6,10 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
-using Assets.Scripts.Utility;
 using Newtonsoft.Json;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Scripts.Fitbit
 {
