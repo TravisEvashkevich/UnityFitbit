@@ -119,6 +119,12 @@ namespace Assets.Scripts.Fitbit
 #endif
         }
 
+        public void ClearRefreshCode()
+        {
+            PlayerPrefs.DeleteKey("FitbitRefreshToken");
+            Debug.Log("Refresh Token has been CLEARED!");
+        }
+
         private void UseReturnCode()
         {
             Debug.Log("return code isn't empty");
