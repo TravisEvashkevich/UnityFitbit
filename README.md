@@ -6,6 +6,10 @@ Check out the Example Project (Example Project/Fitbit Example Project/Assets -> 
 
 ***You may have to add the FITBITAPI.cs script to the "Fitbit Caller" Object for the example to work. ***
 
+You can watch a videon on how to get up and running below
+
+https://youtu.be/Nec-7eNgQNs
+
 If you're interested in how to use the class WITH Android This should help :)
 http://technicalartistry.blogspot.ca/2016/01/fitbit-unity-oauth-2-and-native.html
 
