@@ -1,6 +1,7 @@
 # UnityFitbit
 Classes to help with getting data from Fitbit. 
 Check out the Example Project (Example Project/Fitbit Example Project/Assets -> Example Scene)
+
 ***-----IMPORTANT! ----
 You may have to add the FITBITAPI.cs script to the "Fitbit Caller" Object for the example to work. ****
 
