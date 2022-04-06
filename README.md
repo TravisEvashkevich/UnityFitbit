@@ -1,3 +1,7 @@
+## Important
+Please note I haven't done Fitbit programming since this was put up (over 6 years ago) and I don't know how to get things running with Fitbit and their current API. 
+As much as I'd love to help people get up and running I don't have the time to investigate it myself. This Repo might not be useful anymore but I'm leaving it up in case it does hold a nugget of truth.
+
 # UnityFitbit
 Classes to help with getting data from Fitbit. 
 Check out the Example Project (Example Project/Fitbit Example Project/Assets -> Example Scene)
